@@ -21,7 +21,7 @@ import javax.swing.JSlider;
  */
 public class interfacePrograma extends javax.swing.JFrame {
 
-    private int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+    private int x1 = 0, y1 = 0, x2 = 0, y2 = 0, InicioX = 0, InicioY = 0;
     private Point pontoInicial;
     private desenhaReta object1 = new desenhaReta();
     private desenhaCircunferencia object2 = new desenhaCircunferencia();
@@ -65,6 +65,7 @@ public class interfacePrograma extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         corSelecionada1 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -77,6 +78,7 @@ public class interfacePrograma extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem19 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -126,6 +128,13 @@ public class interfacePrograma extends javax.swing.JFrame {
         corSelecionada1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "horizontal", "vertical" }));
 
         jLabel3.setText("refletir");
+
+        jButton1.setText("fechar polilinha");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Arquivo");
 
@@ -212,6 +221,14 @@ public class interfacePrograma extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem5);
+
+        jMenuItem19.setText("Polilinha Fechada");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem19);
 
         jMenuBar1.add(jMenu2);
 
@@ -309,15 +326,16 @@ public class interfacePrograma extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1093, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(corSelecionada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addComponent(corSelecionada1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)))
+                            .addComponent(jLabel3)
+                            .addComponent(jButton1)))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,7 +353,9 @@ public class interfacePrograma extends javax.swing.JFrame {
                         .addGap(37, 37, 37)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(corSelecionada1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(corSelecionada1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(jButton1)))
                 .addGap(0, 2, Short.MAX_VALUE))
         );
 
@@ -397,13 +417,37 @@ public class interfacePrograma extends javax.swing.JFrame {
                     y2 = 0;
                 }
                 break;
-            case "Desenhar um Polilinha Aberta":
+            case "Desenhar uma Polilinha Aberta":
                 x2 = x1;
                 y2 = y1;
                 x1 = evt.getPoint().x;
                 y1 = evt.getPoint().y;
                 jLabelAreaPintura.setIcon(new ImageIcon(object1.drawing(img, x1, y1, x2, y2)));
                 break;
+            case "Desenhar polilinha fechada":
+                if (x1 == 0) {
+                    InicioX = evt.getPoint().x;
+                    InicioY = evt.getPoint().y;
+                    if (x1 == 0) {
+                        x1 = evt.getPoint().x;
+                        y1 = evt.getPoint().y;
+                    } else {
+                        x2 = evt.getPoint().x;
+                        y2 = evt.getPoint().y;
+                        jLabelAreaPintura.setIcon(new ImageIcon(object1.drawing(img, x1, y1, x2, y2)));
+                        x1 = 0;
+                    }
+                }
+                if (x1 != 0) {
+                    x2 = x1;
+                    y2 = y1;
+                    x1 = evt.getPoint().x;
+                    y1 = evt.getPoint().y;
+                    jLabelAreaPintura.setIcon(new ImageIcon(object1.drawing(img, x1, y1, x2, y2)));
+                }
+
+                break;
+
             case "Desenhar uma Circunferência":
                 if (x1 == 0) {
                     x1 = evt.getPoint().x;
@@ -535,8 +579,8 @@ public class interfacePrograma extends javax.swing.JFrame {
         imagem foto = new imagem();
         int distX = Integer.parseInt(JOptionPane.showInputDialog("distancia em X"));
         int distY = Integer.parseInt(JOptionPane.showInputDialog("distancia em Y"));
-        jLabelAreaPintura.setIcon(new ImageIcon(foto.doTransladar(img, Math.abs(img.getWidth()+distX), Math.abs(img.getHeight()+distY),distX, distY)));
-        
+        jLabelAreaPintura.setIcon(new ImageIcon(foto.doTransladar(img, Math.abs(img.getWidth() + distX), Math.abs(img.getHeight() + distY), distX, distY)));
+
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
@@ -545,18 +589,33 @@ public class interfacePrograma extends javax.swing.JFrame {
         int distY = Integer.parseInt(JOptionPane.showInputDialog("nova altura da imagem "));
         jLabelAreaPintura.setIcon(new ImageIcon(foto.doEscala(img, distX, distY)));
 
-        
+
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
         imagem foto = new imagem();
         int distX = Integer.parseInt(JOptionPane.showInputDialog("Distancia em X "));
         int distY = Integer.parseInt(JOptionPane.showInputDialog("Distancia em Y "));
-        int novax= ( img.getWidth()+distX), novay=(img.getHeight()+distY);
-                
-        System.out.print(" "+ novax+"  "+novay +"  "+distX+"  "+ distY);
-        jLabelAreaPintura.setIcon(new ImageIcon(foto.doCisalhamento(img, img.getWidth()+(distX*img.getHeight()), img.getHeight()+(distY*img.getWidth()),distX, distY)));
+        int novax = (img.getWidth() + distX), novay = (img.getHeight() + distY);
+
+        System.out.print(" " + novax + "  " + novay + "  " + distX + "  " + distY);
+        jLabelAreaPintura.setIcon(new ImageIcon(foto.doCisalhamento(img, img.getWidth() + (distX * img.getHeight()), img.getHeight() + (distY * img.getWidth()), distX, distY)));
     }//GEN-LAST:event_jMenuItem18ActionPerformed
+
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+        jLabel1.setText("Desenhar polilinha fechada");
+        x1 = 0;
+        y1 = 0;
+        x2 = 0;
+        y2 = 0;
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jLabelAreaPintura.setIcon(new ImageIcon(object1.drawing(img, x1, y1, InicioX, InicioY)));
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -597,6 +656,7 @@ public class interfacePrograma extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> corSelecionada;
     private javax.swing.JComboBox<String> corSelecionada1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -617,6 +677,7 @@ public class interfacePrograma extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
+    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
