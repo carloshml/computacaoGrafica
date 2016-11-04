@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package compgraficacompleto;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 /**
+ * Universidade Federal do Tocantins Computação Gráfica 
+ * Professor: Tanilson Dias
+ * Aluno: Carlos Casca
  *
  * @author carloscasca
  */

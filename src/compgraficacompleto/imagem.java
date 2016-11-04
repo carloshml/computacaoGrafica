@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package compgraficacompleto;
 
 import java.awt.Color;
@@ -466,24 +461,21 @@ public class imagem {
                 break;
 
         }
-
         return img;
-
     }
 
     public BufferedImage doTonsCinza(BufferedImage img, int valor) {
-
+        BufferedImage aux = new BufferedImage(img.getWidth(), img.getHeight(), img.getType());
         for (int y = 0; y < img.getHeight(); y++) {
             for (int x = 0; x < img.getWidth(); x++) {
                 Color minhacor = new Color(img.getRGB(x, y));
                 int numCinza = (minhacor.getBlue() + minhacor.getRed() + minhacor.getGreen() + valor) / 4;
 
                 Color cinza = new Color(numCinza, numCinza, numCinza);
-                img.setRGB(x, y, cinza.getRGB());
+                aux.setRGB(x, y, cinza.getRGB());
             }
         }
-        return img;
-
+        return aux;
     }
 
     public BufferedImage doRodar(BufferedImage bufferedImage, double angulo) {
@@ -594,7 +586,7 @@ public class imagem {
 
         for (int y = 0; y < img.getHeight(); y++) {
             for (int x = 0; x < img.getWidth(); x++) {
-                aux.setRGB(x + (Mudax*y), y+ (Muday*x), img.getRGB(x, y));
+                aux.setRGB(x + (Mudax * y), y + (Muday * x), img.getRGB(x, y));
             }
         }
         return aux;

@@ -209,7 +209,7 @@ public class interfacePrograma extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem3);
 
-        jMenuItem4.setText("Polilinha Fechada");
+        jMenuItem4.setText("()");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -554,7 +554,7 @@ public class interfacePrograma extends javax.swing.JFrame {
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         try {
-            ImageIO.write(img, "PNG", new File("arteabstrata.png"));
+            ImageIO.write(copy, "PNG", new File("arteabstrata.png"));
         } catch (IOException ex) {
             Logger.getLogger(interfacePrograma.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -641,21 +641,25 @@ public class interfacePrograma extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         jLabelAreaPintura.setIcon(new ImageIcon(object1.drawing(img, x1, y1, InicioX, InicioY)));
+        x1 = 0;
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
-        passaBaixa foto= new passaBaixa();
-        jLabelAreaPintura.setIcon(new ImageIcon(foto.doPassaBaixa(img,img.getWidth(),img.getHeight()))); 
+        passaBaixa foto = new passaBaixa();
+        jLabelAreaPintura.setIcon(new ImageIcon(foto.doPassaBaixa(img, img.getWidth(), img.getHeight())));
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
-        passaAlto foto= new passaAlto();
-        jLabelAreaPintura.setIcon(new ImageIcon(foto.doPassaAlta(img,img.getWidth(),img.getHeight())));
+        passaAlto foto = new passaAlto();
+        copy= foto.doPassaAlta(img, img.getWidth(), img.getHeight());
+        jLabelAreaPintura.setIcon(new ImageIcon(copy));
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
-             passaAlto foto= new passaAlto();
-        jLabelAreaPintura.setIcon(new ImageIcon(foto.doPassaAltaAula(img,img.getWidth(),img.getHeight())));
+        passaAlto foto = new passaAlto();
+        copy=foto.doPassaAltaAula(img, img.getWidth(),img.getHeight());
+        jLabelAreaPintura.setIcon(new ImageIcon(copy));
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     /**
