@@ -162,9 +162,9 @@ public class passaAlto {
             }
         }
         
-                for (int y = 0; y < img.getHeight() ; y++) {
+        for (int y = 0; y < img.getHeight() ; y++) {
             for (int x = 0; x < img.getWidth() ; x++) {
-                Color cor1 = new Color(img.getRGB(x , y ));                
+                Color cor1 = new Color(aux.getRGB(x , y ));                
                 cor1 = new Color(255-cor1.getRed(),255-cor1.getGreen(), 255-cor1.getBlue());   
                 aux.setRGB(x, y, cor1.getRGB());
             }
